@@ -31,6 +31,7 @@ dependencies {
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'org.spockframework:spock-core:1.1-groovy-2.4-rc-3'
     testCompile 'org.spockframework:spock-spring:1.1-groovy-2.4-rc-3'
+    testRuntime 'cglib:cglib-nodep:3.2.4'
 }
 
 idea {
