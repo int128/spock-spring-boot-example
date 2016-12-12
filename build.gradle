@@ -1,0 +1,41 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE'
+    }
+}
+
+apply plugin: 'groovy'
+apply plugin: 'spring-boot'
+apply plugin: 'idea'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    // Groovy
+    compile 'org.codehaus.groovy:groovy-all:2.4.7'
+
+    // Spring
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-jetty'
+    runtime 'org.springframework.boot:spring-boot-devtools'
+
+    // Spock
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.spockframework:spock-core:1.1-groovy-2.4-rc-3'
+    testCompile 'org.spockframework:spock-spring:1.1-groovy-2.4-rc-3'
+}
+
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main/")
+    }
+}
