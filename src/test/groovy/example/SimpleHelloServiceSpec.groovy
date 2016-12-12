@@ -1,6 +1,5 @@
-package example.integration
+package example
 
-import example.HelloService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification
@@ -8,12 +7,12 @@ import spock.lang.Specification
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE
 
 /**
- * An example of component integration test.
+ * A simple example of a test on Spring container.
  *
  * @author Hidetake Iwata
  */
 @SpringBootTest(webEnvironment = NONE)
-class HelloServiceSpec extends Specification {
+class SimpleHelloServiceSpec extends Specification {
     @Autowired
     HelloService service
 

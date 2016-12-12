@@ -40,13 +40,7 @@ Configure the mock injection:
 ```
 
 
-## [`example.integration.HelloServiceSpec`](/src/test/groovy/example/integration/HelloServiceSpec.groovy)
-
-This verifies behavior of the component integrated with dependencies, i.e. without any mock.
-Simple and easy solution.
-
-
-## [`example.e2e.HelloServiceSpec`](/src/test/groovy/example/e2e/HelloServiceSpec.groovy)
+## [`example.HelloControllerSpec`](/src/test/groovy/example/HelloControllerSpec.groovy)
 
 This is an end-to-end test to verify behavior of the REST API.
 See also [Testing improvements in Spring Boot 1.4](https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4).
@@ -55,6 +49,13 @@ Mark as a Spring Boot test with the real web environment:
 
 ```groovy
 @SpringBootTest(webEnvironment = RANDOM_PORT)
+```
+
+Use the `TestRestTemplate` to make a request.
+
+```groovy
+    @Autowired
+    TestRestTemplate restTemplate
 ```
 
 Make a request to the target application:
@@ -71,3 +72,5 @@ Verify the response:
         entity.statusCode == HttpStatus.OK
         entity.body.name == 'world'
 ```
+
+Mock injection can be used in the end-to-end test.
