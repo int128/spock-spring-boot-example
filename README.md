@@ -2,7 +2,7 @@
 
 This is an example of Spring Boot app tested with Spock framework. 
 
-- Spring Boot 1.4
+- Spring Boot 1.5
 - Spock 1.1-rc-3
 - Groovy 2.4
 
