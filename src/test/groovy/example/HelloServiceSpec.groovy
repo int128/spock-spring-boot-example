@@ -1,11 +1,8 @@
 package example
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.context.TestConfiguration
-import org.springframework.context.annotation.Bean
 import spock.lang.Specification
-import spock.mock.DetachedMockFactory
+import spock.lang.Subject
 
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE
 
@@ -16,11 +13,13 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
  */
 @SpringBootTest(webEnvironment = NONE)
 class HelloServiceSpec extends Specification {
-    @Autowired
-    HelloService service
+    @Subject HelloService service
 
-    @Autowired
-    ExternalApiClient client
+    ExternalApiClient client = Mock()
+
+    def setup() {
+        service = new HelloService(client)
+    }
 
     def 'hello() should return world'() {
         given:
@@ -31,15 +30,5 @@ class HelloServiceSpec extends Specification {
 
         then:
         hello.name == 'world'
-    }
-
-    @TestConfiguration
-    static class MockConfig {
-        final detachedMockFactory = new DetachedMockFactory()
-
-        @Bean
-        ExternalApiClient externalApiClient() {
-            detachedMockFactory.Mock(ExternalApiClient)
-        }
     }
 }
