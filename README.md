@@ -7,15 +7,29 @@ This is an example of Spring Boot app tested with Spock framework.
 - Groovy 2.4
 
 
-## [`example.HelloServiceSpec`](/src/test/groovy/example/HelloServiceSpec.groovy)
+## Component Test
 
-This verifies behavior of the component using mock injection.
-See also [Spock Spring Module](http://spockframework.org/spock/docs/1.1-rc-3/modules.html).
+- [`FooServiceSpec`](/src/test/groovy/example/FooServiceSpec.groovy)
+- [`BarServiceSpec`](/src/test/groovy/example/BarServiceSpec.groovy)
+
+These are component tests using the constructor mock injection.
 
 Mark as a Spring Boot test without the web environment:
 
 ```groovy
 @SpringBootTest(webEnvironment = NONE)
+```
+
+Instantiate a service class with a mock dependency.
+
+```groovy
+    @Subject BarService service
+
+    ExternalApiClient client = Mock()
+
+    def setup() {
+        service = new BarService(client)
+    }
 ```
 
 Declare the mock interaction by Spock style:
@@ -25,30 +39,25 @@ Declare the mock interaction by Spock style:
         1 * client.getDefault() >> new Hello('world')
 ```
 
-Configure the mock injection:
 
-```groovy
-    @TestConfiguration
-    static class MockConfig {
-        final detachedMockFactory = new DetachedMockFactory()
+## Integration Test
 
-        @Bean
-        ExternalApiClient externalApiClient() {
-            detachedMockFactory.Mock(ExternalApiClient)
-        }
-    }
-```
+- [`FooControllerSpec`](/src/test/groovy/example/FooControllerSpec.groovy)
+- [`BarControllerSpec`](/src/test/groovy/example/BarControllerSpec.groovy)
 
-
-## [`example.HelloControllerSpec`](/src/test/groovy/example/HelloControllerSpec.groovy)
-
-This is an end-to-end test to verify behavior of the REST API.
+These are end-to-end tests using the test rest template.
 See also [Testing improvements in Spring Boot 1.4](https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4).
 
 Mark as a Spring Boot test with the real web environment:
 
 ```groovy
 @SpringBootTest(webEnvironment = RANDOM_PORT)
+```
+
+Import the mock configuration.
+
+```groovy
+@Import(IntegrationTestConfiguration)
 ```
 
 Use the `TestRestTemplate` to make a request.
@@ -62,7 +71,7 @@ Make a request to the target application:
 
 ```groovy
         when:
-        def entity = restTemplate.getForEntity('/hello', Hello)
+        def entity = restTemplate.getForEntity('/foo', Hello)
 ```
 
 Verify the response:
@@ -72,5 +81,3 @@ Verify the response:
         entity.statusCode == HttpStatus.OK
         entity.body.name == 'world'
 ```
-
-Mock injection can be used in the end-to-end test.

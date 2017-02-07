@@ -16,19 +16,19 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
  */
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @Import(IntegrationTestConfiguration)
-class HelloControllerSpec extends Specification {
+class FooControllerSpec extends Specification {
     @Autowired
     TestRestTemplate restTemplate
 
     @Autowired
     ExternalApiClient client
 
-    def '/hello should return world'() {
+    def '/foo should return world'() {
         given:
         1 * client.getDefault() >> new Hello('world')
 
         when:
-        def entity = restTemplate.getForEntity('/hello', Hello)
+        def entity = restTemplate.getForEntity('/foo', Hello)
 
         then:
         entity.statusCode == HttpStatus.OK

@@ -12,23 +12,23 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
  * @author Hidetake Iwata
  */
 @SpringBootTest(webEnvironment = NONE)
-class HelloServiceSpec extends Specification {
-    @Subject HelloService service
+class BarServiceSpec extends Specification {
+    @Subject BarService service
 
     ExternalApiClient client = Mock()
 
     def setup() {
-        service = new HelloService(client)
+        service = new BarService(client)
     }
 
-    def 'hello() should return world'() {
+    def 'hello() should return a named bean'() {
         given:
-        1 * client.getDefault() >> new Hello('world')
+        1 * client.findByName('happy') >> new Hello('happy')
 
         when:
-        def hello = service.hello()
+        def hello = service.hello('happy')
 
         then:
-        hello.name == 'world'
+        hello.name == 'happy'
     }
 }

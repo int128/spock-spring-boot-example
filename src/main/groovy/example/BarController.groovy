@@ -8,16 +8,11 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping(produces = 'application/json')
-class HelloController {
+class BarController {
     @Autowired
-    private HelloService service
+    private BarService service
 
-    @GetMapping('/hello')
-    Hello hello() {
-        service.hello()
-    }
-
-    @GetMapping('/hello/{name}')
+    @GetMapping('/bar/{name}')
     Hello helloByName(@PathVariable String name) {
         service.hello(name)
     }
