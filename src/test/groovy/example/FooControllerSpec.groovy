@@ -5,6 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.context.annotation.Import
 import org.springframework.http.HttpStatus
+import spock.lang.Shared
 import spock.lang.Specification
 
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
@@ -23,15 +24,17 @@ class FooControllerSpec extends Specification {
     @Autowired
     ExternalApiClient client
 
+    @Shared world = 'world'
+
     def '/foo should return world'() {
         given:
-        1 * client.getDefault() >> new Hello('world')
+        1 * client.getDefault() >> new Hello(world)
 
         when:
         def entity = restTemplate.getForEntity('/foo', Hello)
 
         then:
         entity.statusCode == HttpStatus.OK
-        entity.body.name == 'world'
+        entity.body.name == world
     }
 }
