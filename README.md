@@ -1,4 +1,4 @@
-# Spock and Spring Boot example [![Build Status](https://travis-ci.org/int128/spock-spring-boot-example.svg?branch=master)](https://travis-ci.org/int128/spock-spring-boot-example)
+# Spock and Spring Boot example [![Build Status](https://travis-ci.org/int128/spock-spring-boot-example.svg?branch=master)](https://travis-ci.org/int128/spock-spring-boot-example) [![Gradle Status](https://gradleupdate.appspot.com/int128/spock-spring-boot-example/status.svg)](https://gradleupdate.appspot.com/int128/spock-spring-boot-example/status)
 
 This is an example of Spring Boot app tested with Spock framework. 
 
