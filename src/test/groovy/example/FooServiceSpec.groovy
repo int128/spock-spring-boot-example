@@ -23,12 +23,12 @@ class FooServiceSpec extends Specification {
 
     def 'hello() should return world'() {
         given:
-        1 * client.getDefault() >> new Hello('world')
+        1 * client.getDefault() >> new Hello(ExternalApiClient.DEFAULT_HELLO_VALUE)
 
         when:
         def hello = service.hello()
 
         then:
-        hello.name == 'world'
+        hello.name == ExternalApiClient.DEFAULT_HELLO_VALUE
     }
 }
