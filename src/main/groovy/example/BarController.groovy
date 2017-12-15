@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping(produces = 'application/json')
 class BarController {
-    @Autowired
-    private BarService service
+    //@Autowired
+    /*private*/ final BarService service
+
+    BarController(final BarService service) {
+        this.service = service
+    }
 
     @GetMapping('/bar/{name}')
     Hello helloByName(@PathVariable String name) {

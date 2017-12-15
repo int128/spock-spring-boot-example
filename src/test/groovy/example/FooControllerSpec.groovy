@@ -25,13 +25,13 @@ class FooControllerSpec extends Specification {
 
     def '/foo should return world'() {
         given:
-        1 * client.getDefault() >> new Hello('world')
+        1 * client.getDefault() >> new Hello(ExternalApiClient.DEFAULT_HELLO_VALUE)
 
         when:
         def entity = restTemplate.getForEntity('/foo', Hello)
 
         then:
         entity.statusCode == HttpStatus.OK
-        entity.body.name == 'world'
+        entity.body.name == ExternalApiClient.DEFAULT_HELLO_VALUE
     }
 }

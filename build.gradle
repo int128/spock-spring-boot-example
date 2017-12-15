@@ -1,7 +1,11 @@
 plugins {
     id 'groovy'
     id 'idea'
-    id 'org.springframework.boot' version '1.5.7.RELEASE'
+    id 'org.springframework.boot' version '1.5.9.RELEASE'
+}
+
+configurations {
+    compile.exclude module: 'spring-boot-starter-tomcat'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -13,7 +17,7 @@ repositories {
 
 dependencies {
     // Groovy
-    compile 'org.codehaus.groovy:groovy-all:2.4.7'
+    compile 'org.codehaus.groovy:groovy-all:2.4.13'
 
     // Spring
     compile 'org.springframework.boot:spring-boot-starter-web'

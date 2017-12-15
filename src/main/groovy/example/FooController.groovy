@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping(produces = 'application/json')
 class FooController {
-    @Autowired
-    private FooService service
+    //@Autowired
+    /*private*/ final FooService service
+
+    FooController(final FooService service) {
+        this.service = service
+    }
 
     @GetMapping('/foo')
     Hello hello() {
