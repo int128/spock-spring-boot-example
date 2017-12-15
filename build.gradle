@@ -4,6 +4,10 @@ plugins {
     id 'org.springframework.boot' version '1.5.9.RELEASE'
 }
 
+configurations {
+    compile.exclude module: 'spring-boot-starter-tomcat'
+}
+
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
